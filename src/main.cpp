@@ -1,8 +1,34 @@
 #include <iostream>
 #include <string>
-#include "eurydice.hpp"
 
-#include <rtaudio/RtAudio.h>
+#include "eurydice.hpp"
+#include "runner.hpp"
+
+void test_runner() {
+    Runner runner;
+
+    std::cout << "RtAudio version: " << runner.getRtAudioVersion() << std::endl << std::endl;
+
+    std::cout << "Available apis: ";
+    for (Runner::ApiDefinition apiDef : runner.getAvailableApis()) {
+        std::cout << apiDef.displayName << " (" << apiDef.identifyingName << ") ";
+    }
+    std::cout << std::endl << std::endl;
+
+    std::cout << "Devices: ";
+    for (Runner::DeviceDefinition device : runner.getAvailableDevices()) {
+        std::cout << device << std::endl;
+    }
+
+    std::cout << "--------------------------------" << std::endl << std::endl;
+
+    try {
+        const Runner::DeviceDefinition defaultDevice = runner.getDefaultDevice();
+        std::cout << "Default device: " << defaultDevice << std::endl << std::endl;
+    } catch (const std::runtime_error& e) {
+        std::cout << e.what() << std::endl << std::endl;
+    }
+}
 
 int main(int argc, char* argv[]) {
     std::cout << "=== Eurydice C++ Application ===" << std::endl;
@@ -25,7 +51,7 @@ int main(int argc, char* argv[]) {
     
     try {
         app.run();
-        std::cout << "RtAudio version: " << RtAudio::getVersion() << std::endl;
+        test_runner();
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
         return 1;
