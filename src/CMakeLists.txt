@@ -20,5 +20,8 @@ add_executable(eurydice ${MAIN_SOURCES})
 # Link executable with library
 target_link_libraries(eurydice eurydice_lib)
 
+# Link RtAudio (required via vcpkg)
+target_link_libraries(eurydice RtAudio::rtaudio)
+
 # Set compiler flags for executable
 target_compile_options(eurydice PRIVATE -Wall -Wextra -Wpedantic) 

@@ -2,6 +2,8 @@
 #include <string>
 #include "eurydice.hpp"
 
+#include <rtaudio/RtAudio.h>
+
 int main(int argc, char* argv[]) {
     std::cout << "=== Eurydice C++ Application ===" << std::endl;
     
@@ -23,6 +25,7 @@ int main(int argc, char* argv[]) {
     
     try {
         app.run();
+        std::cout << "RtAudio version: " << RtAudio::getVersion() << std::endl;
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
         return 1;

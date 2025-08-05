@@ -14,20 +14,27 @@ A modern C++ project with CMake build system.
 - **CMake** 3.16 or higher
 - **GCC** 11 or higher (or compatible compiler)
 - **Make** (for convenience commands)
+- **vcpkg** (for package management)
+- **RtAudio** (installed via vcpkg)
 
 ## Quick Start
 
-1. **Build the project**
+1. **Setup vcpkg and install dependencies**
+   ```bash
+   make setup
+   ```
+
+2. **Build the project**
    ```bash
    make build
    ```
 
-2. **Run the application**
+3. **Run the application**
    ```bash
    make run
    ```
 
-3. **Run tests**
+4. **Run tests**
    ```bash
    make test
    ```
@@ -73,6 +80,16 @@ cd build && ctest --verbose  # Run tests with verbose output
 - **C++17**: Modern C++ standard
 - **CMake 3.16+**: Modern build system
 - **Google Test**: Unit testing framework
+- **RtAudio**: Cross-platform real-time audio I/O library
+
+### Audio Support
+
+This project includes RtAudio for real-time audio functionality:
+
+- **Cross-platform**: Works on Windows, macOS, and Linux
+- **Multiple APIs**: Supports ALSA, PulseAudio, JACK, Core Audio, WASAPI, ASIO
+- **Real-time**: Low-latency audio input/output
+- **Device enumeration**: Lists available audio devices and their capabilities
 
 ## Troubleshooting
 

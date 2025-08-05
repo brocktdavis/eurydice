@@ -18,6 +18,9 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 # Find packages
 find_package(PkgConfig REQUIRED)
 
+# Find RtAudio using vcpkg
+find_package(RtAudio CONFIG REQUIRED)
+
 # Include directories
 include_directories(${CMAKE_SOURCE_DIR}/include)
 include_directories(${CMAKE_SOURCE_DIR}/src)
