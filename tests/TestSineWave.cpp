@@ -25,24 +25,23 @@ TEST(SineWaveFixture, test1Hz) {
 
     EXPECT_NEAR(wave.getFrame(0).RTAUDIO_FLOAT64, 0.0, ERROR);
     EXPECT_NEAR(wave.getFrame(0.0).RTAUDIO_FLOAT64, 0.0, ERROR);
+    EXPECT_NEAR(wave.getFrame(0.5).RTAUDIO_FLOAT64, 0.0, ERROR);
     EXPECT_NEAR(wave.getFrame(1).RTAUDIO_FLOAT64, 0.0, ERROR);
     EXPECT_NEAR(wave.getFrame(1.0).RTAUDIO_FLOAT64, 0.0, ERROR);
+    EXPECT_NEAR(wave.getFrame(1.5).RTAUDIO_FLOAT64, 0.0, ERROR);
 
-    EXPECT_NEAR(wave.getFrame(0.5).RTAUDIO_FLOAT64, 1.0, ERROR);
-    EXPECT_NEAR(wave.getFrame(1.5).RTAUDIO_FLOAT64, -1.0, ERROR);
+    EXPECT_NEAR(wave.getFrame(0.25).RTAUDIO_FLOAT64, 1.0, ERROR);
+    EXPECT_NEAR(wave.getFrame(0.75).RTAUDIO_FLOAT64, -1.0, ERROR);
 }
 
 TEST(SineWaveFixture, test440Hz) {
     SineWave wave(440.0);
     ASSERT_NO_THROW();
 
-    EXPECT_NEAR(wave.getFrame(0).RTAUDIO_FLOAT64, 0.0, ERROR);
     EXPECT_NEAR(wave.getFrame(0.0).RTAUDIO_FLOAT64, 0.0, ERROR);
-    EXPECT_NEAR(wave.getFrame(1).RTAUDIO_FLOAT64, 0.0, ERROR);
     EXPECT_NEAR(wave.getFrame(1.0).RTAUDIO_FLOAT64, 0.0, ERROR);
-
     EXPECT_NEAR(wave.getFrame(1.0/440.0).RTAUDIO_FLOAT64, 0.0, ERROR);
 
-    EXPECT_NEAR(wave.getFrame(0.5/440.0).RTAUDIO_FLOAT64, 1.0, ERROR);
-    EXPECT_NEAR(wave.getFrame(1.5/440.0).RTAUDIO_FLOAT64, -1.0, ERROR);
+    EXPECT_NEAR(wave.getFrame(0.25/440.0).RTAUDIO_FLOAT64, 1.0, ERROR);
+    EXPECT_NEAR(wave.getFrame(0.75/440.0).RTAUDIO_FLOAT64, -1.0, ERROR);
 }

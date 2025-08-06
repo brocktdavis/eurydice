@@ -1,6 +1,5 @@
 # Source files for the library
 set(LIB_SOURCES
-    eurydice.cpp
     runner.cpp
     SineWave.cpp
 )

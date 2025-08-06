@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 
-#include "eurydice.hpp"
 #include "runner.hpp"
 
 void test_runner() {
@@ -33,11 +32,11 @@ void test_runner() {
 int main(int argc, char* argv[]) {
     std::cout << "=== Eurydice C++ Application ===" << std::endl;
     
-    Eurydice app;
     
     if (argc > 1) {
         std::string arg = argv[1];
         if (arg == "--version" || arg == "-v") {
+            // TODO: use manifest/Cmake/other place to get this version
             std::cout << "Eurydice version 1.0.0" << std::endl;
             return 0;
         } else if (arg == "--help" || arg == "-h") {
@@ -50,7 +49,6 @@ int main(int argc, char* argv[]) {
     }
     
     try {
-        app.run();
         test_runner();
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
