@@ -2,6 +2,7 @@
 set(LIB_SOURCES
     eurydice.cpp
     runner.cpp
+    SineWave.cpp
 )
 
 # Source files for the main executable
@@ -28,4 +29,4 @@ target_link_libraries(eurydice eurydice_lib)
 target_link_libraries(eurydice RtAudio::rtaudio)
 
 # Set compiler flags for executable
-target_compile_options(eurydice PRIVATE -Wall -Wextra -Wpedantic) 
+target_compile_options(eurydice PRIVATE -Wall -Wextra -Wpedantic)

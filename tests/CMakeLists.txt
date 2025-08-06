@@ -14,6 +14,7 @@ endif()
 # Test source files
 set(TEST_SOURCES
     test_eurydice.cpp
+    TestSineWave.cpp
 )
 
 # Create test executable
