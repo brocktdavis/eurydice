@@ -1,4 +1,4 @@
-#include "runner.hpp"
+#include "Runner.hpp"
 
 Runner::Runner() {
     _audio = new RtAudio();

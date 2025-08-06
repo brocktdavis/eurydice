@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 
-#include "runner.hpp"
+#include "Runner.hpp"
 
 void test_runner() {
     Runner runner;
