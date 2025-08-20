@@ -27,6 +27,9 @@ public:
     virtual RtAudioFormat supportedFormatsBitVector(void) = 0;
     virtual SAMPLE_T getFrame(double seconds) = 0;
 
+    // Pure virtual method for string representation
+    virtual std::string describe() const = 0;
+
     // Friend declaration for stream operator that uses the virtual method
     friend std::ostream& operator<<(std::ostream& os, const AbstractSample& sample);
 };

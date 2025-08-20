@@ -63,6 +63,11 @@ Runner::DeviceDefinition Runner::getDefaultDevice(void) {
     }
 }
 
+void Runner::playSample(AbstractSample &sample) {
+    std::cout << "Play sample" << sample << std::endl;
+}
+
+
 std::ostream &operator<<(std::ostream& os, const Runner::DeviceDefinition &device) {
     os << device.displayName << " (id: " << device.rtAudioId << ")" << std::endl;
     os << "Max Channels (in, out, duplex): " << std::get<0>(device.channels) << ", " << std::get<1>(device.channels) << ", " << std::get<2>(device.channels) << std::endl;

@@ -2,6 +2,13 @@
 #include <string>
 
 #include "Runner.hpp"
+#include "SineWave.hpp"
+
+void test_sine(Runner &runner) {
+    SineWave wave(440.0);
+
+    runner.playSample(wave);
+}
 
 void test_runner() {
     Runner runner;
@@ -27,6 +34,10 @@ void test_runner() {
     } catch (const std::runtime_error& e) {
         std::cout << e.what() << std::endl << std::endl;
     }
+
+    std::cout << "--------------------------------" << std::endl << std::endl;
+
+    test_sine(runner);
 }
 
 int main(int argc, char* argv[]) {

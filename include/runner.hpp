@@ -5,6 +5,8 @@
 
 #include <rtaudio/RtAudio.h>
 
+#include "AbstractSample.hpp"
+
 class Runner {
 private:
     RtAudio* _audio;
@@ -35,6 +37,7 @@ public:
     std::vector<ApiDefinition> getAvailableApis(void) const;
     std::vector<DeviceDefinition> getAvailableDevices(void); // TODO: const?
     DeviceDefinition getDefaultDevice(void); // TODO: const?
+    void playSample(AbstractSample&);
 };
 
 std::ostream& operator<<(std::ostream& os, const Runner::DeviceDefinition& device);

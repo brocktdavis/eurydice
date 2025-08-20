@@ -14,8 +14,8 @@ public:
     RtAudioFormat supportedFormatsBitVector(void) override;
     AbstractSample::SAMPLE_T getFrame(double seconds) override;
 
-    // Override the stream operator for more detailed output
-     friend std::ostream& operator<<(std::ostream& os, const SineWave& sineWave);
+    // Used in << operator
+    std::string describe() const override;
 };
 
 #endif // SINE_WAVE_H

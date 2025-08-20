@@ -2,6 +2,7 @@
 
 #include <cassert>
 #include <cmath>
+#include <sstream>
 
 RtAudioFormat SineWave::supportedFormatsBitVector() {
     return RTAUDIO_SINT8 | RTAUDIO_SINT16 | RTAUDIO_SINT24 | RTAUDIO_SINT32 | RTAUDIO_FLOAT32 | RTAUDIO_FLOAT64;
@@ -26,8 +27,8 @@ AbstractSample::SAMPLE_T SineWave::getFrame(double seconds) {
     return result;
 }
 
-// Stream operator for SineWave
-std::ostream& operator<<(std::ostream& os, const SineWave& sineWave) {
-    os << "SineWave " << sineWave._frequency << "Hz";
-    return os;
+std::string SineWave::describe() const {
+    std::ostringstream strs;
+    strs << "SineWave " << _frequency << "Hz";
+    return strs.str();
 }
