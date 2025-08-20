@@ -1,13 +1,15 @@
 #include "SineWave.hpp"
 
 #include <cassert>
+#include <cmath>
 
 RtAudioFormat SineWave::supportedFormatsBitVector() {
     return RTAUDIO_SINT8 | RTAUDIO_SINT16 | RTAUDIO_SINT24 | RTAUDIO_SINT32 | RTAUDIO_FLOAT32 | RTAUDIO_FLOAT64;
 }
 
 AbstractSample::SAMPLE_T SineWave::getFrame(double seconds) {
-    double sample = std::sin(2.0 * M_PI * _frequency * seconds);
+    const double PI = 3.14159265358979323846;
+    double sample = std::sin(2.0 * PI * _frequency * seconds);
     
     AbstractSample::SAMPLE_T result{};
     
@@ -22,4 +24,10 @@ AbstractSample::SAMPLE_T SineWave::getFrame(double seconds) {
     }
     
     return result;
+}
+
+// Stream operator for SineWave
+std::ostream& operator<<(std::ostream& os, const SineWave& sineWave) {
+    os << "SineWave " << sineWave._frequency << "Hz";
+    return os;
 }

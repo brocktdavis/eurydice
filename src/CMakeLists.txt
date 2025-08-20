@@ -1,5 +1,6 @@
 # Source files for the library
 set(LIB_SOURCES
+    AbstractSample.cpp
     runner.cpp
     SineWave.cpp
 )

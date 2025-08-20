@@ -1,6 +1,8 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
+#include <sstream>
+
 #include <RtAudio.h>
 
 #include "SineWave.hpp"
@@ -44,4 +46,16 @@ TEST(SineWaveFixture, test440Hz) {
 
     EXPECT_NEAR(wave.getFrame(0.25/440.0).RTAUDIO_FLOAT64, 1.0, ERROR);
     EXPECT_NEAR(wave.getFrame(0.75/440.0).RTAUDIO_FLOAT64, -1.0, ERROR);
+}
+
+TEST(SineWaveFixture, testRepr) {
+    SineWave wave1(440.0);
+    SineWave wave2(440.5);
+    SineWave wave3(440.3);
+    SineWave wave4(0.0);
+
+    std::stringstream ss;
+    ss << wave1 << "-" << wave2 << "-" << wave3 << "-" << wave4;
+
+    EXPECT_EQ(ss.str(), "SineWave 440Hz-SineWave 440.5Hz-SineWave 440.3Hz-SineWave 0Hz");
 }
