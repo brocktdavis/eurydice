@@ -20,7 +20,7 @@ setup:
 	@if [ ! -f "$(VCPKG_DIR)/vcpkg" ]; then \
 		cd $(VCPKG_DIR) && ./bootstrap-vcpkg.sh; \
 	fi
-	@$(VCPKG_DIR)/vcpkg install rtaudio
+	@$(VCPKG_DIR)/vcpkg install rtaudio[pulse]
 
 # Build with vcpkg toolchain (required)
 .PHONY: build
@@ -48,13 +48,11 @@ clean:
 # Run the application
 .PHONY: run
 run: build
-	@echo "Running Eurydice..."
 	@$(BIN_DIR)/eurydice
 
 # Run tests
 .PHONY: test
 test: build
-	@echo "Running tests..."
 	@cd $(BUILD_DIR) && $(MAKE) test
 
 # Help target

@@ -1,4 +1,6 @@
 #include "Runner.hpp"
+#include <tuple>
+#include <algorithm>
 
 Runner::Runner() {
     _audio = new RtAudio();
@@ -52,7 +54,7 @@ std::vector<Runner::DeviceDefinition> Runner::getAvailableDevices(void) {
 
 Runner::DeviceDefinition Runner::getDefaultDevice(void) {
     std::vector<Runner::DeviceDefinition> devices = getAvailableDevices();
-    auto it = find_if(devices.begin(), devices.end(), [this](DeviceDefinition &device) {
+    auto it = std::find_if(devices.begin(), devices.end(), [this](DeviceDefinition &device) {
         return device.rtAudioId == _audio->getDefaultOutputDevice();
     });
 

@@ -11,11 +11,14 @@ A modern C++ project with CMake build system.
 
 ## Prerequisites
 
+- **Make** (for convenience commands)
 - **CMake** 3.16 or higher
 - **GCC** 11 or higher (or compatible compiler)
-- **Make** (for convenience commands)
 - **vcpkg** (for package management)
 - **RtAudio** (installed via vcpkg)
+- **Linux packages**:
+   - **pkg-config**
+   - **bison**
 
 ## Quick Start
 

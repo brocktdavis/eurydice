@@ -3,7 +3,7 @@
 
 #include <sstream>
 
-#include <RtAudio.h>
+#include <rtaudio/RtAudio.h>
 
 #include "SineWave.hpp"
 

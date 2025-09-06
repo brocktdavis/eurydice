@@ -2,6 +2,9 @@
 #define RUNNER_H
 
 #include <string>
+#include <tuple>
+#include <vector>
+#include <algorithm>
 
 #include <rtaudio/RtAudio.h>
 

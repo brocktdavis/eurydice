@@ -1,7 +1,7 @@
 #ifndef ABSTRACT_SAMPLE_H
 #define ABSTRACT_SAMPLE_H
 
-#include <RtAudio/RtAudio.h>
+#include <rtaudio/RtAudio.h>
 #include <iostream>
 #include <string>
 
