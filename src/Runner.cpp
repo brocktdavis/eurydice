@@ -67,29 +67,29 @@ Runner::DeviceDefinition Runner::getDefaultDevice(void) {
 }
 
 struct CallbackData {
-    AbstractSample* sample;
+    const std::vector<std::unique_ptr<AbstractSample>> &samples;
     unsigned int sampleRate;
 };
 
 // Static callback function that can be converted to RtAudioCallback
 int audioCallback(void *outputBuffer, void*, unsigned int nBufferFrames, double streamTime, RtAudioStreamStatus, void *userData) {
     CallbackData* data = static_cast<CallbackData*>(userData);
-    AbstractSample* sample = data->sample;
     unsigned int sampleRate = data->sampleRate;
-    
-    float *buffer = static_cast<float *>(outputBuffer);
-    std::cout << "[audioCallback] streamTime: " << streamTime << ", nBufferFrames: " << nBufferFrames << ", sampleRate: " << sampleRate << std::endl;
+
+    double *buffer = static_cast<double *>(outputBuffer);
+
     for (unsigned int i = 0; i < nBufferFrames; ++i) {
         const double additionalTime = static_cast<double>(i) / sampleRate;
-        std::cout << "i: " << i << ", additionalTime: " << additionalTime << std::endl;
-        buffer[i] = sample->getFrame(streamTime + additionalTime).RTAUDIO_FLOAT32;
+        double ampl = 0.0;
+        for (const auto& sample : data->samples) {
+            ampl += sample->getFrame(streamTime + additionalTime).RTAUDIO_FLOAT64;
+        }
+        buffer[i] = ampl / data->samples.size();
     }
     return 0;
 }
 
-void Runner::playSample(AbstractSample &sample) {
-    std::cout << "Play sample " << sample << std::endl;
-
+void Runner::playSamples(const std::vector<std::unique_ptr<AbstractSample>>& samples) {
     Runner::DeviceDefinition defaultDevice = getDefaultDevice();
 
     RtAudio::StreamParameters params;
@@ -99,23 +99,38 @@ void Runner::playSample(AbstractSample &sample) {
     const unsigned int sampleRate = defaultDevice.currentSampleRate;
     unsigned int bufferFrames = 256;
 
-    CallbackData callbackData = {&sample, sampleRate};
+    CallbackData callbackData = {samples, sampleRate};
 
     RtAudioErrorType result = _audio->openStream(
         &params,
         nullptr, // input params
-        RTAUDIO_FLOAT32,
+        RTAUDIO_FLOAT64,
         sampleRate,
         &bufferFrames,
-        audioCallback,
+        &audioCallback,
         &callbackData
     );
-    
+
     if (result != RTAUDIO_NO_ERROR) {
         std::cerr << "Failed to open audio stream: " << _audio->getErrorText() << std::endl;
         return;
     }
-    
+
+    result = _audio->startStream();
+    if (result != RTAUDIO_NO_ERROR) {
+        std::cerr << "Failed to start audio stream: " << _audio->getErrorText() << std::endl;
+        return;
+    }
+
+    char input;
+    std::cout << "Press Enter to stop playback...";
+    std::cin.get(input);
+
+    result = _audio->stopStream();
+    if (_audio->isStreamOpen()) {
+        _audio->closeStream();
+    }
+
     std::cout << "Audio stream opened successfully" << std::endl;
 }
 

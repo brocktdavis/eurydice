@@ -40,7 +40,7 @@ public:
     std::vector<ApiDefinition> getAvailableApis(void) const;
     std::vector<DeviceDefinition> getAvailableDevices(void); // TODO: const?
     DeviceDefinition getDefaultDevice(void); // TODO: const?
-    void playSample(AbstractSample&);
+    void playSamples(const std::vector<std::unique_ptr<AbstractSample>>& samples);
 };
 
 std::ostream& operator<<(std::ostream& os, const Runner::DeviceDefinition& device);

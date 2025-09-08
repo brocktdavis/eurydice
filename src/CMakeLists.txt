@@ -3,6 +3,7 @@ set(LIB_SOURCES
     AbstractSample.cpp
     Runner.cpp
     SineWave.cpp
+    SquareWave.cpp
 )
 
 # Source files for the main executable
